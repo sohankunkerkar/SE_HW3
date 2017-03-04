@@ -1,14 +1,51 @@
-# HW3_sakunker
-All javascript/css/html pages are inside gh-pages branch and Selenium code is reference to master branch.
+package selenium.tests;
+import static org.junit.Assert.*;
+import java.util.List;
+import org.junit.AfterClass;
+//import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+//import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-###Twitter Timline link:
+import io.github.bonigarcia.wdm.ChromeDriverManager;
 
-[Twitter Timeline](https://pages.github.ncsu.edu/sakunker/HW3_sakunker/)
+public class WebTest
+{
+	private static WebDriver driver;
+	
+	@BeforeClass
+	public static void setUp() throws Exception 
+	{
+		//driver = new HtmlUnitDriver();
+		ChromeDriverManager.getInstance().setup();
+		driver = new ChromeDriver();
+	}
+	
+	@AfterClass
+	public static void  tearDown() throws Exception
+	{
+		driver.close();
+		driver.quit();
+	}
 
-### Selenium Testing:
- 
- 1.The participant count of "Frustration of Software Developers" is 55
-``` @Test 
+	
+	/*@Test
+	public void googleExists() throws Exception
+	{
+		driver.get("http://www.google.com");
+        assertEquals("Google", driver.getTitle());		
+	}*/
+	
+	/* Question 1*/
+	@Test
 	public void CheckCount() throws Exception
 	{
 		driver.get("http://www.checkbox.io/studies.html");
@@ -17,14 +54,15 @@ All javascript/css/html pages are inside gh-pages branch and Selenium code is re
 		WebElement check = driver.findElement(By.xpath("//*[@id='dynamicStudies']/div[8]/div[2]/p/span[1]"));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='dynamicStudies']/div[8]/div[2]/p/span[1]")));
 		assertEquals("Matched","55", check.getText());
-	}
-```
-2.The total number of studies closed is 5
-```@Test
+	}	
+	
+	/* Question 2*/
+	@Test
 	public void Closed() throws Exception
 	{
 		driver.get("http://www.checkbox.io/studies.html");
-	// http://geekswithblogs.net/Aligned/archive/2014/10/16/selenium-and-timing-issues.aspx
+		
+		// http://geekswithblogs.net/Aligned/archive/2014/10/16/selenium-and-timing-issues.aspx
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='status']/span[.='CLOSED']")));
 		List<WebElement> spans = driver.findElements(By.xpath("//a[@class='status']/span[.='CLOSED']"));
@@ -32,9 +70,9 @@ All javascript/css/html pages are inside gh-pages branch and Selenium code is re
 		assertNotNull(spans);
 		assertEquals(5, spans.size());
 	}
-```
-3.If a status of a study is open, you can click on a "Participate" button.
-```	    @Test
+	
+	/* Question 3 */
+    @Test
 	public void ButtonVisible() throws Exception
 	{
 		driver.get("http://www.checkbox.io/studies.html");
@@ -53,12 +91,11 @@ All javascript/css/html pages are inside gh-pages branch and Selenium code is re
 			}
 		}
 		
-		assertEquals("Matched",true,but);
+		assertEquals("Matched", true,but);
 	}
-```
-4.Check if the "Software Changes Survey" has a Amazon reward image
-
-```@Test
+    
+    /* Question 4*/
+	@Test
 	public void imageCheck() throws Exception
 	{
 		driver.get("http://www.checkbox.io/studies.html");
@@ -76,4 +113,6 @@ All javascript/css/html pages are inside gh-pages branch and Selenium code is re
 	        }
 		}
 	}
-```	
+	
+	
+
