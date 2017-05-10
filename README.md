@@ -1,7 +1,7 @@
 # HW3_sakunker
 All javascript/css/html pages are inside gh-pages branch and Selenium code is reference to master branch.
 
-###Twitter Timline link:
+### Twitter Timline link:
 
 [Twitter Timeline](https://pages.github.ncsu.edu/sakunker/HW3_sakunker/)
 
